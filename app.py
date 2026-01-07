@@ -1,34 +1,61 @@
 from agents.client_agent import client_agent
 from agents.ba_agent import ba_agent
+from memory.session_memory import SessionMemory
+
 from agents.solution_architect_agent import solution_architect_agent
+
 from agents.final_proposal_agent import final_proposal_agent
-from utils.file_saver import save_markdown
+
+from utils.markdown_saver import save_markdown
+
+from graph.proposal_graph import build_proposal_graph
+
+from memory.persistent_memory import PersistentSessionMemory
+from uuid import uuid4
+
 
 if __name__ == "__main__":
-    print("=== Client → Client Agent → BA Agent → Solution Architect ===\n")
+    print("=== Client ↔ Client Agent (Discovery Mode) ===")
+    print("Type 'CONFIRM' when the understanding is correct.\n")
 
-    client_input = input("Client: ")
+    session = SessionMemory()
+    structured_summary = None
 
-    print("\n--- Client Agent Output ---")
-    client_output = client_agent(client_input)
-    print(client_output)
+    while not session.is_confirmed():
+        user_input = input("Client: ")
+        reply, confirmed = client_agent(session, user_input)
+        print(f"\nClient Agent:\n{reply}\n")
 
-    print("\n--- BA Agent Output ---")
-    ba_output = ba_agent(client_output)
+        if confirmed:
+            structured_summary = reply
+
+    print("\n=== BA Agent Analysis ===\n")
+    ba_output = ba_agent(structured_summary)
     print(ba_output)
 
-    print("\n--- Solution Architect Output ---")
+    print("\n=== Solution Architect Output ===\n")
     architect_output = solution_architect_agent(ba_output)
     print(architect_output)
 
-    
-
-    print("\n--- Final Proposal ---")
+    print("\n=== Final Proposal ===\n")
     final_output = final_proposal_agent(ba_output, architect_output)
     print(final_output)
 
-    # Save to markdown
+
+
     file_path = save_markdown(final_output)
-    print(f"\n✅ Proposal saved as Markdown: {file_path}")
+    print(f"\n✅ Proposal saved successfully: {file_path}")
 
 
+    proposal_graph = build_proposal_graph()
+
+    result = proposal_graph.invoke({
+        "client_summary": structured_summary
+    })
+
+    final_output = result["final_proposal"]
+    print("\n=== FINAL PROPOSAL ===\n")
+    print(final_output)
+
+    session_id = str(uuid4())
+    session = PersistentSessionMemory(session_id)
