@@ -1,7 +1,5 @@
 openai>=1.0.0
 python-dotenv
-fastapi
-uvicorn
 
 beautifulsoup4
 requests
@@ -12,5 +10,14 @@ chromadb
 langgraph
 langchain-core
 
+reportlab
+
+fastapi
+uvicorn
+pydantic
+
+
+streamlit
+requests
 
 

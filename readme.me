@@ -1,37 +1,48 @@
+python -m venv venv
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+
+python -m vector_db.load_company_docs
+
+////////////////////////////////////////
 🔥 Step 1 — Delete the Vector Store Folder
-
 Close your app first.
-
 Then delete this folder:
-
 vector_db_store/
-
-
 (Just delete it manually from File Explorer)
-
 This removes all old embeddings.
 
 🔁 Step 2 — Re-ingest Documents
-
 Open a Python shell in project root:
+python
+Then run:
 
 python
-
-
-Then run:
 
 from vector_db.company_knowledge import load_company_docs
 load_company_docs("company_docs")
 
-
 You should see:
-
 ✅ Company knowledge loaded into Vector DB
 
-
 Exit Python:
-
 exit()
 
 ▶ Step 3 — Run App Again
 python app.py
+
+//////////
+
+import os
+import chromadb
+from chromadb.config import Settings
+from openai import OpenAI
+from dotenv import load_dotenv
+import uuid
+
+load_dotenv()
+client = OpenAI()
+
+

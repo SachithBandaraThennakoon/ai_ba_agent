@@ -13,6 +13,8 @@ from graph.proposal_graph import build_proposal_graph
 from memory.persistent_memory import PersistentSessionMemory
 from uuid import uuid4
 
+from utils.pdf_generator import markdown_to_pdf
+
 
 if __name__ == "__main__":
     print("=== Client ↔ Client Agent (Discovery Mode) ===")
@@ -20,6 +22,12 @@ if __name__ == "__main__":
 
     session = SessionMemory()
     structured_summary = None
+
+    from vector_db.company_knowledge import ensure_company_knowledge_loaded
+
+    # Ensure company knowledge is available before starting chat
+    ensure_company_knowledge_loaded("company_docs")
+
 
     while not session.is_confirmed():
         user_input = input("Client: ")
@@ -59,3 +67,7 @@ if __name__ == "__main__":
 
     session_id = str(uuid4())
     session = PersistentSessionMemory(session_id)
+
+
+    pdf_path = markdown_to_pdf(final_output)
+    print(f"\n📄 Proposal PDF generated: {pdf_path}")
