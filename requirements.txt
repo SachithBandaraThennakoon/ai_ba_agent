@@ -1,23 +1,20 @@
+# Core AI
 openai>=1.0.0
 python-dotenv
 
-beautifulsoup4
-requests
-faiss-cpu
-tiktoken
+# Vector DB & embeddings
 chromadb
+tiktoken
 
+# Agent orchestration
 langgraph
 langchain-core
 
-reportlab
-
+# API
 fastapi
 uvicorn
 pydantic
 
-
-streamlit
+# Utilities
 requests
-
-
+reportlab
