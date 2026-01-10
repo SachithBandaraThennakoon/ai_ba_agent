@@ -73,45 +73,28 @@ client = OpenAI()
 ```bash
 deactivate
 ```
-
-
 ## 🔹 STEP 2 — Delete the Existing Virtual Environment
-
 ```bash
 rm -rf venv
 ```
-
 ⚠️ This deletes **only** the virtual environment, **not your code**.
-
 ---
-
 ## 🔹 STEP 3 — Create a Fresh Virtual Environment (Python 3.11)
-
 ```bash
 python3.11 -m venv venv
 ```
-
----
-
 ## 🔹 STEP 4 — Activate It
 
 ```bash
 source venv/bin/activate
 ```
-
 Verify:
-
 ```bash
 python --version
 ```
-
 Expected:
-
 ```
 Python 3.11.x
-```
-
----
 
 ## 🔹 STEP 5 — Install Clean Dependencies
 
@@ -123,15 +106,8 @@ Then:
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-
----
-
 ## 🔹 STEP 6 — Verify Core Packages
-
-```bash
 pip show fastapi chromadb langgraph
-```
-
 No errors → ✅ perfect
 
 ---
