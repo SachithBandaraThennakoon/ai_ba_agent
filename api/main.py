@@ -1,8 +1,12 @@
-# api/main.py
-from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
-
-@app.get("/")
-def health():
-    return {"status": "Xceed AI backend running"}
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://SachithBandaraThennakoon.github.io",
+        "http://localhost:5173"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
