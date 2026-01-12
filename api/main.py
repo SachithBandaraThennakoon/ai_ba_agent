@@ -12,7 +12,7 @@ def startup_event():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://xceed.github.io",        # GitHub Pages
+        "https://SachithBandaraThennakoon.github.io",        # GitHub Pages
         "https://www.xceed.live",           # Your domain (if any)
         "http://localhost:5173" ,
         "https://sachiththennakoon.com"
