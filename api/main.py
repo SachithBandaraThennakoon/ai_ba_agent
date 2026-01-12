@@ -13,8 +13,10 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://xceed.github.io",        # GitHub Pages
-        "https://www.xceed.ai",           # Your domain (if any)
-        "http://localhost:5173"           # Local dev
+        "https://www.xceed.live",           # Your domain (if any)
+        "http://localhost:5173" ,
+        "https://sachiththennakoon.com"
+                  # Local dev
     ],
     allow_credentials=True,
     allow_methods=["*"],
