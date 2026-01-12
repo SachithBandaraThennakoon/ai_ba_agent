@@ -21,3 +21,6 @@ streamlit
 
 # Force compatible NumPy
 numpy<2.0
+
+gunicorn
+
