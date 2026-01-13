@@ -7,6 +7,35 @@ from fastapi.templating import Jinja2Templates
 from fastapi import Request
 
 
+from uuid import uuid4
+from agents.client_agent import client_agent
+from memory.persistent_memory import PersistentSessionMemory
+
+sessions = {}
+
+@app.post("/chat")
+def chat(req: ChatRequest):
+    # Session handling
+    if req.session_id and req.session_id in sessions:
+        session = sessions[req.session_id]
+        session_id = req.session_id
+    else:
+        session_id = str(uuid4())
+        session = PersistentSessionMemory(session_id)
+        sessions[session_id] = session
+
+    # Agent response
+    reply, confirmed = client_agent(session, req.message)
+
+    # 🔥 IMPORTANT: reply key MUST exist
+    return {
+        "session_id": session_id,
+        "reply": reply,
+        "confirmed": confirmed
+    }
+
+
+
 # --------------------------------------------------
 # CREATE SINGLE FASTAPI APP (ONLY ONCE)
 # --------------------------------------------------
