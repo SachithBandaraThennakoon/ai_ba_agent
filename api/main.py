@@ -28,6 +28,7 @@ app.add_middleware(
         "https://SachithBandaraThennakoon.github.io",
         "https://www.xceed.live",
         "https://sachiththennakoon.com",
+        "http://localhost:5173",
         "http://localhost:5173"
     ],
     allow_credentials=True,
