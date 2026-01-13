@@ -12,7 +12,12 @@ app = FastAPI(title="Xceed AI Pre-Sales Agent")
 # --------------------------------------------------
 @app.on_event("startup")
 def startup_event():
-    ensure_company_knowledge_loaded("company_docs")
+    try:
+        ensure_company_knowledge_loaded("company_docs")
+        print("✅ Company knowledge loaded")
+    except Exception as e:
+        print("❌ Startup error:", str(e))
+
 
 # --------------------------------------------------
 # CORS CONFIGURATION
@@ -34,5 +39,6 @@ app.add_middleware(
 # HEALTH CHECK (VERY IMPORTANT FOR AZURE)
 # --------------------------------------------------
 @app.get("/")
-def health_check():
+def health():
     return {"status": "Xceed AI backend running"}
+
