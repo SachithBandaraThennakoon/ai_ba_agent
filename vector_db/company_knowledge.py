@@ -1,3 +1,9 @@
+# --- SQLite fix for Azure App Service ---
+import sys
+import pysqlite3
+sys.modules["sqlite3"] = pysqlite3
+# --------------------------------------
+
 import os
 import chromadb
 from chromadb.config import Settings
