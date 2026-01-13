@@ -1,4 +1,4 @@
-name: Build and deploy Python app to Azure Web App - xceed-ai-ba-backend
+name: Build and deploy Python app to Azure Web App - xceed-ai-backend
 
 on:
   push:
@@ -44,6 +44,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'xceed-ai-ba-backend'
+          app-name: 'xceed-ai-backend'
           slot-name: 'Production'
           package: .
