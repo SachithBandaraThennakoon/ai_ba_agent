@@ -2,6 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from vector_db.company_knowledge import ensure_company_knowledge_loaded
 
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
+
+
 # --------------------------------------------------
 # CREATE SINGLE FASTAPI APP (ONLY ONCE)
 # --------------------------------------------------
@@ -42,4 +47,12 @@ app.add_middleware(
 @app.get("/")
 def health():
     return {"status": "Xceed AI backend running"}
+
+
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/chat-ui", response_class=HTMLResponse)
+def chat_ui(request: Request):
+    return templates.TemplateResponse("chat.html", {"request": request})
 
