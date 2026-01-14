@@ -10,6 +10,15 @@ from agents.client_agent import client_agent
 from memory.persistent_memory import PersistentSessionMemory
 from vector_db.company_knowledge import ensure_company_knowledge_loaded
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+env = os.getenv("ENVIRONMENT", "production")
+print(f"🚀 Starting in {env} mode")
+
+
 # --------------------------------------------------
 # CREATE FASTAPI APP (FIRST!)
 # --------------------------------------------------
